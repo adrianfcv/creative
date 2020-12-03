@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({
 const mongoose = require('mongoose');
 
 // connect to the database
-mongoose.connect('mongodb://localhost:27017/museum', {
+mongoose.connect('mongodb://localhost:27017/creative', {
   useNewUrlParser: true
 });
 
@@ -26,6 +26,11 @@ const upload = multer({
 // Create a scheme for items in the museum: a title and a path to an image.
 const itemSchema = new mongoose.Schema({
   title: String,
+  country: String,
+  club: String,
+  birth: String,
+  position: String,
+  category: String,
   description: String,
   path: String,
 });
@@ -50,6 +55,11 @@ app.post('/api/photos', upload.single('photo'), async (req, res) => {
 app.post('/api/items', async (req, res) => {
   const item = new Item({
     title: req.body.title,
+    country: req.body.country,
+    club: req.body.club,
+    birth: req.body.birth,
+    position: req.body.position,
+    category: req.body.category,
     description: req.body.description,
     path: req.body.path,
   });
@@ -63,15 +73,28 @@ app.post('/api/items', async (req, res) => {
 });
 
 // Get a list of all of the items in the museum.
-app.get('/api/items', async (req, res) => {
-  try {
-    let items = await Item.find();
+app.get('/api/items/:category', async (req, res) => {
+  let category = req.params.category;
+  if (category=="Soccer") {
+    let items = await Item.find({"category":"Soccer"});
     res.send(items);
-  } catch (error) {
-    console.log(error);
-    res.sendStatus(500);
+  }
+  else if (category=="Football") {
+    let items = await Item.find({"category":"Football"});
+    res.send(items);
+  }
+  else {
+    try {
+      let items = await Item.find();
+      res.send(items);
+    } catch (error) {
+      console.log(error);
+      res.sendStatus(500);
+    }
   }
 });
+
+
 
 app.delete('/api/items/:id', async (req, res) => {
   try {
@@ -91,6 +114,11 @@ app.put('/api/items/:id', async (req, res) => {
       _id: req.params.id
     })
     item.title=req.body.title;
+    item.country=req.body.country;
+    item.club=req.body.club;
+    item.birth=req.body.birth;
+    item.position=req.body.position;
+    item.category=req.body.category;
     item.description=req.body.description;
     item.save();
     res.sendStatus(200);

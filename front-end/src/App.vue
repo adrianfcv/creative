@@ -3,12 +3,20 @@
   <div class="header">
     <router-link to="/">
       <div class="logo">
-        <img src="/ordinary.png">
+        <img src="/sports.svg" width="90" height="90">
       </div>
     </router-link>
     <div class="title">
-      <h1>Museum of Ordinary Objects</h1>
+      <h1>     The Greatest Athletes in History  </h1>
     </div>
+  </div>
+  <div class="tab">
+      <router-link to="/soccer">
+        <button type="button"><b>Soccer</b></button>
+      </router-link>
+      <router-link to="/football">
+        <button type="button"><b>Football</b></button>
+      </router-link>
   </div>
   <div class="content">
     <router-view />
@@ -37,12 +45,14 @@ body {
 .header {
   display: flex;
   padding: 10px 100px 0px 100px;
-  background-color: #5BDEFF;
+  background-color: white;
   color: #1C454F;
+  border: 4px solid black;
 }
 
 .title {
   margin-top: 5px;
+  margin-left: 15px;
 }
 
 .title h1 {
@@ -58,8 +68,9 @@ body {
 .footer {
   height: 50px;
   padding: 20px 100px 0px 100px;
-  background: #e3e3e3;
+  background: white;
   font-size: 12px;
+  border: 4px solid black;
 }
 
 .footer a {
@@ -73,4 +84,34 @@ h1 {
 h2 {
   font-size: 14px;
 }
+
+.tab {
+  overflow: hidden;
+  border-right: 4px solid black;
+  border-left: 4px solid black;
+  border-bottom: 4px solid black;
+  background-color: white;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px 12px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
 </style>

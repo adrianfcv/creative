@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Admin from '../views/Admin.vue'
+import Soccer from '../views/Soccer.vue'
+import Football from '../views/Football.vue'
 
 Vue.use(VueRouter)
 
@@ -14,6 +16,16 @@ const routes = [{
     path: '/admin',
     name: 'admin',
     component: Admin
+  },
+  {
+    path: '/soccer',
+    name: 'soccer',
+    component: Soccer
+  },
+  {
+    path: '/football',
+    name: 'football',
+    component: Football
   }
 ]
 

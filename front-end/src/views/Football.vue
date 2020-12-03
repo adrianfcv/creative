@@ -32,7 +32,8 @@ export default {
     methods: {
       async getItems() {
         try {
-          let response = await axios.get("/api/items/" + "All");
+          let category = "Football";
+          let response = await axios.get("/api/items/" + category);
           this.items = response.data;
           return true;
         } catch (error) {
